@@ -1,0 +1,75 @@
+﻿<Page x:Class="DinoGame.Pages.PlayPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DinoGame.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="380"
+      d:DesignWidth="400">
+    <StackPanel>
+        <Button
+            Click="ButtonBack_Click"
+            Background="Transparent"
+            BorderBrush="White"
+            BorderThickness="2"
+            Width="40"
+            Height="40"
+            Padding="0"
+            HorizontalAlignment="Left"
+            Margin="15 15 0 0">
+            <StackPanel>
+                <materialDesign:PackIcon 
+                    Kind="ArrowBack"
+                    Height="25"
+                    Width="25"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+
+        <StackPanel 
+            Margin="100 100 0 0"
+            Width="200"
+            HorizontalAlignment="Left">
+            <TextBlock
+                Text="Ник:"
+                FontSize="18"
+                HorizontalAlignment="Left"
+                FontFamily="/Fonts/Monocraft.ttf #Monocraft">
+                <TextBlock.Foreground>
+                    <SolidColorBrush Color="WhiteSmoke" Opacity="0.9"/>
+                </TextBlock.Foreground>
+            </TextBlock>
+
+            <TextBox
+                x:Name="TBoxNickname"
+                Width="200"
+                Height="30"
+                HorizontalAlignment="Left"
+                BorderBrush="White"
+                BorderThickness="2"
+                Foreground="White"
+                FontFamily="/Fonts/Monocraft.ttf #Monocraft"
+                FontSize="16"
+                Padding="5"
+                Margin="0 5 0 0"
+                materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
+                CaretBrush="White"/>
+
+            <Button
+                Click="ButtonStart_Click"
+                Background="Transparent"
+                BorderBrush="White"
+                BorderThickness="2"
+                FontFamily="/Fonts/Monocraft.ttf #Monocraft"
+                Width="120"
+                Height="40"
+                Padding="0"
+                HorizontalAlignment="Center"
+                Margin="0 15 0 0"
+                Content="Начать"/>
+        </StackPanel>
+    </StackPanel>
+</Page>
