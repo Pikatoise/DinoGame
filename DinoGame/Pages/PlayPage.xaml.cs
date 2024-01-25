@@ -13,7 +13,7 @@ namespace DinoGame.Pages
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow rootFrame = Application.Current.MainWindow as MainWindow;
+            MainWindow rootFrame = (MainWindow)Application.Current.MainWindow;
             rootFrame.MainFrame.Source = new Uri("Pages/MenuPage.xaml", UriKind.Relative);
         }
 
@@ -27,7 +27,7 @@ namespace DinoGame.Pages
 
             App.Nickname = TBoxNickname.Text;
 
-            MainWindow rootFrame = Application.Current.MainWindow as MainWindow;
+            MainWindow rootFrame = (MainWindow)Application.Current.MainWindow;
             rootFrame.MainFrame.Visibility = Visibility.Collapsed;
             rootFrame.MainFrame.Source = new Uri("Pages/MenuPage.xaml", UriKind.Relative);
 

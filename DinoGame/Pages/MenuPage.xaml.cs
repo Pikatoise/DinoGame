@@ -10,19 +10,19 @@ namespace DinoGame.Pages
         {
             InitializeComponent();
 
-            if (!App.DbStatus)
+            if (!App.DbContext.DbStatus)
                 ButtonResults.IsEnabled = false;
         }
 
         private void ButtonPlay_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow rootFrame = Application.Current.MainWindow as MainWindow;
+            MainWindow rootFrame = (MainWindow)Application.Current.MainWindow;
             rootFrame.MainFrame.Source = new Uri("Pages/PlayPage.xaml", UriKind.Relative);
         }
 
         private void ButtonResults_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow rootFrame = Application.Current.MainWindow as MainWindow;
+            MainWindow rootFrame = (MainWindow)Application.Current.MainWindow;
             rootFrame.MainFrame.Source = new Uri("Pages/ResultsPage.xaml", UriKind.Relative);
         }
     }

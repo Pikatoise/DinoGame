@@ -6,24 +6,24 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:DinoGame"
         mc:Ignorable="d"
-        Height="450" 
-        Width="400"
+        Height="650" 
+        Width="600"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid>
         <Image 
             x:Name="ImageBackground"
-            Height="450"
-            Width="400"/>
+            Stretch="Fill"/>
 
         <Canvas x:Name="CanvasMain" Cursor="">
             <Image
                 x:Name="ImageFloor"
-                Width="800"
+                Width="1200"
+                Stretch="Fill"
                 Height="30"
                 Canvas.Bottom="10" 
                 Canvas.Left="0"
-                Source="/floor.png"/>
+                Source="/img/floor.png"/>
 
             <Image
                 x:Name="ImageDinoLeft"
@@ -32,7 +32,7 @@
                 Canvas.Bottom="30"
                 Canvas.Left="10" 
                 Visibility="Hidden"
-                Source="/dino-left.png"/>
+                Source="/img/dino-left.png"/>
 
             <Image
                 x:Name="ImageDinoRight"
@@ -41,7 +41,7 @@
                 Canvas.Bottom="30"
                 Canvas.Left="10"
                 Visibility="Hidden"
-                Source="/dino-right.png"/>
+                Source="/img/dino-right.png"/>
 
             <Image
                 x:Name="ImageCactus"
@@ -49,7 +49,7 @@
                 Canvas.Right="-150"
                 Width="40"
                 Height="80"
-                Source="/cactus.png"/>
+                Source="/img/cactus.png"/>
 
             <TextBlock
                 x:Name="TBlockScore"
@@ -65,9 +65,9 @@
             <Frame 
                 x:Name="MainFrame"
                 Source="Pages/MenuPage.xaml"
-                NavigationUIVisibility="Hidden"
-                Height="380"
-                Width="400"/>
+                Width="600"
+                Height="650"
+                NavigationUIVisibility="Hidden"/>
         </Canvas>
     </Grid>
 </Window>

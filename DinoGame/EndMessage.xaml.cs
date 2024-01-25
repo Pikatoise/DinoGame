@@ -8,8 +8,8 @@ namespace DinoGame
         {
             InitializeComponent();
 
-            this.Left = left + 80;
-            this.Top = top + 175;
+            Left = left + 80;
+            Top = top + 175;
         }
 
         private void ButtonToMenu_Click(object sender, RoutedEventArgs e)

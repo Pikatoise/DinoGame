@@ -1,25 +1,15 @@
 ﻿using DinoGame.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Windows;
 
 namespace DinoGame
 {
     public partial class App: Application
     {
-        public static GamedbContext DbContext;
+        public static GamedbContext DbContext = new GamedbContext(new DbContextOptionsBuilder<GamedbContext>()
+            .UseSqlite("Filename=gamedb")
+            .Options);
 
-        public static bool DbStatus
-        {
-            get
-            {
-                return DbContext.Database.CanConnect();
-            }
-        }
-
-        public static string Nickname;
-
-        public App()
-        {
-            DbContext = new GamedbContext();
-        }
+        public static string Nickname = "Гость";
     }
 }

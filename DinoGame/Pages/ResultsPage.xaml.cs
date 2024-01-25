@@ -18,13 +18,13 @@ namespace DinoGame.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow rootFrame = Application.Current.MainWindow as MainWindow;
+            MainWindow rootFrame = (MainWindow)Application.Current.MainWindow;
             rootFrame.MainFrame.Source = new Uri("Pages/MenuPage.xaml", UriKind.Relative);
         }
 
         private void LoadPlayersData()
         {
-            if (App.DbStatus)
+            if (App.DbContext.DbStatus)
             {
                 List<Player> players = App.DbContext.Players.ToList();
 
@@ -54,6 +54,15 @@ namespace DinoGame.Pages
                     LBoxPlayers.Items.Add(lbitem);
                 }
             }
+        }
+
+        private void ButtonClearResults_Click(object sender, RoutedEventArgs e)
+        {
+            App.DbContext.Players.RemoveRange(App.DbContext.Players.ToList());
+
+            App.DbContext.SaveChanges();
+
+            LBoxPlayers.Items.Clear();
         }
     }
 }

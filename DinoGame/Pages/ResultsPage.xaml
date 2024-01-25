@@ -6,7 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DinoGame.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="380"
+      d:DesignHeight="400"
       d:DesignWidth="400">
     <StackPanel>
         <StackPanel 
@@ -50,5 +50,15 @@
             BorderBrush="White"
             BorderThickness="2"
             Foreground="White"/>
+
+        <Button 
+            x:Name="ButtonClearResults"
+            Click="ButtonClearResults_Click"
+            Width="20"
+            Height="20"
+            HorizontalAlignment="Right"
+            Margin="0 10 25 0"
+            Background="Transparent"
+            BorderBrush="Transparent"/>
     </StackPanel>
 </Page>

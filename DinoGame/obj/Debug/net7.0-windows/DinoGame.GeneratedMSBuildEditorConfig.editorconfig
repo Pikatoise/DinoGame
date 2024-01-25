@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DinoGame
-build_property.ProjectDir = C:\Users\Pikatoise\Desktop\Файлы\Учеба\Финк\ПП01\DinoGame\DinoGame\
+build_property.ProjectDir = C:\Users\Pikatoise\Desktop\DinoGame\DinoGame\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

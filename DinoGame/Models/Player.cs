@@ -2,9 +2,9 @@
 
 public class Player
 {
-    public long Id { get; set; }
+    public int Id { get; set; }
 
     public string Nickname { get; set; } = null!;
 
-    public long? Score { get; set; }
+    public int Score { get; set; }
 }

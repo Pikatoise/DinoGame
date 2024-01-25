@@ -9,19 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="cactus.png" />
-    <None Remove="dino-left.png" />
-    <None Remove="dino-right.png" />
-    <None Remove="floor.png" />
     <None Remove="Fonts\Monocraft.ttf" />
     <None Remove="gamedb" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="cactus.png" />
-    <Resource Include="dino-left.png" />
-    <Resource Include="dino-right.png" />
-    <Resource Include="floor.png" />
     <Resource Include="Fonts\Monocraft.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

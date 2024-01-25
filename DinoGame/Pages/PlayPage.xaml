@@ -7,8 +7,10 @@
       xmlns:local="clr-namespace:DinoGame.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="380"
-      d:DesignWidth="400">
-    <StackPanel>
+      d:DesignWidth="400"
+      VerticalAlignment="Stretch"
+      HorizontalAlignment="Stretch">
+    <Grid x:Name="playPageCanvas">
         <Button
             Click="ButtonBack_Click"
             Background="Transparent"
@@ -18,7 +20,8 @@
             Height="40"
             Padding="0"
             HorizontalAlignment="Left"
-            Margin="15 15 0 0">
+            VerticalAlignment="Top"
+            Margin="10">
             <StackPanel>
                 <materialDesign:PackIcon 
                     Kind="ArrowBack"
@@ -29,14 +32,12 @@
             </StackPanel>
         </Button>
 
-        <StackPanel 
-            Margin="100 100 0 0"
-            Width="200"
-            HorizontalAlignment="Left">
+        <StackPanel
+            VerticalAlignment="Center">
             <TextBlock
                 Text="Ник:"
-                FontSize="18"
-                HorizontalAlignment="Left"
+                FontSize="24"
+                HorizontalAlignment="Center"
                 FontFamily="/Fonts/Monocraft.ttf #Monocraft">
                 <TextBlock.Foreground>
                     <SolidColorBrush Color="WhiteSmoke" Opacity="0.9"/>
@@ -45,31 +46,31 @@
 
             <TextBox
                 x:Name="TBoxNickname"
-                Width="200"
-                Height="30"
-                HorizontalAlignment="Left"
+                Width="240"
+                Height="40"
                 BorderBrush="White"
                 BorderThickness="2"
                 Foreground="White"
                 FontFamily="/Fonts/Monocraft.ttf #Monocraft"
-                FontSize="16"
+                FontSize="18"
                 Padding="5"
                 Margin="0 5 0 0"
                 materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
-                CaretBrush="White"/>
+                CaretBrush="White"
+                HorizontalAlignment="Center"/>
 
             <Button
                 Click="ButtonStart_Click"
                 Background="Transparent"
                 BorderBrush="White"
+                HorizontalAlignment="Center"
                 BorderThickness="2"
                 FontFamily="/Fonts/Monocraft.ttf #Monocraft"
-                Width="120"
+                Width="140"
                 Height="40"
                 Padding="0"
-                HorizontalAlignment="Center"
                 Margin="0 15 0 0"
                 Content="Начать"/>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </Page>

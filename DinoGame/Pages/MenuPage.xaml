@@ -7,13 +7,15 @@
       xmlns:local="clr-namespace:DinoGame.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="380"
-      d:DesignWidth="400">
+      d:DesignWidth="400"
+      VerticalAlignment="Center"
+      HorizontalAlignment="Center">
     <StackPanel>
         <TextBlock
             Text="Динозаврик"
             FontSize="42"
             FontFamily="/Fonts/Monocraft.ttf #Monocraft"
-            Margin="60 50 0 0">
+            HorizontalAlignment="Center">
             <TextBlock.Foreground>
                 <SolidColorBrush Color="WhiteSmoke" Opacity="0.9"/>
             </TextBlock.Foreground>
@@ -27,6 +29,7 @@
             BorderThickness="2"
             Width="210"
             Height="60"
+            HorizontalAlignment="Center"
             Margin="0 90 0 0">
             <StackPanel>
                 <TextBlock

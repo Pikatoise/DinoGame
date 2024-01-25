@@ -4,18 +4,13 @@ namespace DinoGame.Models;
 
 public partial class GamedbContext: DbContext
 {
-    public GamedbContext()
-    {
-    }
-
     public GamedbContext(DbContextOptions<GamedbContext> options) : base(options)
     {
     }
 
     public virtual DbSet<Player> Players { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite("Filename=gamedb");
+    public bool DbStatus => Database.CanConnect();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,6 +21,5 @@ public partial class GamedbContext: DbContext
 
         OnModelCreatingPartial(modelBuilder);
     }
-
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
