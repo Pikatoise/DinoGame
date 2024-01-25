@@ -2,21 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DinoGame.Pages
 {
-    public partial class ResultsPage : Page
+    public partial class ResultsPage: Page
     {
         public ResultsPage()
         {
@@ -31,7 +22,7 @@ namespace DinoGame.Pages
             rootFrame.MainFrame.Source = new Uri("Pages/MenuPage.xaml", UriKind.Relative);
         }
 
-        void LoadPlayersData()
+        private void LoadPlayersData()
         {
             if (App.DbStatus)
             {
@@ -55,7 +46,7 @@ namespace DinoGame.Pages
 
                     if (i == 0)
                         lbitem.FontSize = 22;
-                    else if (i == 1) 
+                    else if (i == 1)
                         lbitem.FontSize = 18;
                     else if (i == 2)
                         lbitem.FontSize = 16;

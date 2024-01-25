@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gPHC+f/LXCpoW42n+Nmy3ITMDKBedyQ1GUuuw/PezrIWr2uGi2rxfw7XmOaLgX1LdMUxGfRLyMp+8b6fPVw6wQ==",
+  "dgSpecHash": "3zn9jO6QB2FIdHSTB4eVv7f985SoTeXHtZzriAbnUS+VvYFzXbk8dbFj9mVCBvInEmyhKZUocZdw9Ucxy2oPOg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Pikatoise\\Desktop\\Файлы\\Учеба\\Финк\\ПП01\\Программы\\DinoGame\\DinoGame\\DinoGame.csproj",
+  "projectFilePath": "C:\\Users\\Pikatoise\\Desktop\\DinoGame\\DinoGame\\DinoGame.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pikatoise\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Pikatoise\\.nuget\\packages\\materialdesigncolors\\2.1.4\\materialdesigncolors.2.1.4.nupkg.sha512",

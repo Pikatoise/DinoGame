@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace DinoGame.Models;
 
-namespace DinoGame.Models;
-
-public partial class Player
+public class Player
 {
     public long Id { get; set; }
 

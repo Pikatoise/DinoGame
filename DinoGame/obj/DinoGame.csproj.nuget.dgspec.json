@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Pikatoise\\Desktop\\Файлы\\Учеба\\Финк\\ПП01\\Программы\\DinoGame\\DinoGame\\DinoGame.csproj": {}
+    "C:\\Users\\Pikatoise\\Desktop\\DinoGame\\DinoGame\\DinoGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Pikatoise\\Desktop\\Файлы\\Учеба\\Финк\\ПП01\\Программы\\DinoGame\\DinoGame\\DinoGame.csproj": {
+    "C:\\Users\\Pikatoise\\Desktop\\DinoGame\\DinoGame\\DinoGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pikatoise\\Desktop\\Файлы\\Учеба\\Финк\\ПП01\\Программы\\DinoGame\\DinoGame\\DinoGame.csproj",
+        "projectUniqueName": "C:\\Users\\Pikatoise\\Desktop\\DinoGame\\DinoGame\\DinoGame.csproj",
         "projectName": "DinoGame",
-        "projectPath": "C:\\Users\\Pikatoise\\Desktop\\Файлы\\Учеба\\Финк\\ПП01\\Программы\\DinoGame\\DinoGame\\DinoGame.csproj",
+        "projectPath": "C:\\Users\\Pikatoise\\Desktop\\DinoGame\\DinoGame\\DinoGame.csproj",
         "packagesPath": "C:\\Users\\Pikatoise\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pikatoise\\Desktop\\Файлы\\Учеба\\Финк\\ПП01\\Программы\\DinoGame\\DinoGame\\obj\\",
+        "outputPath": "C:\\Users\\Pikatoise\\Desktop\\DinoGame\\DinoGame\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Pikatoise\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,7 +82,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
