@@ -1,7 +1,7 @@
 ﻿using DinoGame.Models;
 using System;
-using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,7 +19,9 @@ namespace DinoGame
         public DispatcherTimer timerSpeedIncrease = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
         public DispatcherTimer timerScore = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 0, 125) };
 
-        public System.Windows.Controls.Image currentDino;
+        private const double GAMESPEEDINCREASE = 0.2;
+        private readonly Key[] CONTROLKEYS = new Key[] { Key.W, Key.Space, Key.Up };
+
         private Random rnd = new Random();
         private double gameSpeed = 3.0;
         private int score = 0;
@@ -41,31 +43,30 @@ namespace DinoGame
             timerDinoAnimation.Tick += DinoAnimation;
             timerSpeedIncrease.Tick += (object? sender, EventArgs e) =>
             {
-                gameSpeed += 0.2;
+                new Task(() => gameSpeed += GAMESPEEDINCREASE).Start();
             };
             timerScore.Tick += (object? sender, EventArgs e) =>
             {
-                score += (int)gameSpeed;
+                new Task(() => score += (int)gameSpeed).Start();
                 TBlockScore.Text = score.ToString();
             };
 
-            currentDino = ImageDinoLeft.Visibility == Visibility.Visible ? ImageDinoLeft : ImageDinoRight;
-
-            SetBackground();
+            //CurrentDino = ImageDinoLeft.Visibility == Visibility.Visible ? ImageDinoLeft : ImageDinoRight;
         }
 
-        private BitmapSource BitmapToImage(Bitmap bitmap) => Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+        private BitmapSource BitmapToImage(System.Drawing.Bitmap bitmap) => Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+        private Image CurrentDino => ImageDinoLeft.Visibility == Visibility.Visible ? ImageDinoLeft : ImageDinoRight;
 
         private void Window_PreviewKeyDown(object? sender, KeyEventArgs e)
         {
             if (isGameStarted && !timerDinoJump.IsEnabled)
-                if (e.Key == Key.Space || e.Key == Key.W || e.Key == Key.Up)
+                if (CONTROLKEYS.Contains(e.Key))
                 {
                     isJumping = true;
-                    currentDino = ImageDinoLeft.Visibility == Visibility.Visible ? ImageDinoLeft : ImageDinoRight;
+                    //currentDino = ImageDinoLeft.Visibility == Visibility.Visible ? ImageDinoLeft : ImageDinoRight;
 
-                    timerDinoJump.Start();
                     timerDinoAnimation.Stop();
+                    timerDinoJump.Start();
                 }
         }
 
@@ -102,22 +103,26 @@ namespace DinoGame
 
             // Пересечение кактуса с динозавриком
 
-            System.Windows.Controls.Image cDino = ImageDinoLeft.Visibility == Visibility.Visible ? ImageDinoLeft : ImageDinoRight;
+            //Image cDino = ImageDinoLeft.Visibility == Visibility.Visible ? ImageDinoLeft : ImageDinoRight;
 
             double xCactus = 370 - Canvas.GetRight(ImageCactus);
             double yCactus = Canvas.GetBottom(ImageCactus);
 
-            double xDino = Canvas.GetLeft(cDino);
-            double yDino = Canvas.GetBottom(cDino);
+            /*double xDino = Canvas.GetLeft(cDino);
+            double yDino = Canvas.GetBottom(cDino);*/
+
+            double xDino = Canvas.GetLeft(CurrentDino);
+            double yDino = Canvas.GetBottom(CurrentDino);
 
 
-            if (xDino < xCactus && xDino + cDino.Width >= xCactus && yDino + 5 <= yCactus + ImageCactus.Height)
+            //if (xDino < xCactus && xDino + cDino.Width >= xCactus && yDino + 5 <= yCactus + ImageCactus.Height)
+            if (xDino < xCactus && xDino + CurrentDino.Width >= xCactus && yDino + 5 <= yCactus + ImageCactus.Height)
                 StopGame();
         }
 
         private void DinoJump(object? sender, EventArgs e)
         {
-            if (isJumping && Canvas.GetBottom(currentDino) < 170)
+            /*if (isJumping && Canvas.GetBottom(currentDino) < 170)
                 Canvas.SetBottom(currentDino, Canvas.GetBottom(currentDino) + gameSpeed * 1.5);
             else
                 isJumping = false;
@@ -131,22 +136,23 @@ namespace DinoGame
 
                 timerDinoAnimation.Start();
                 timerDinoJump.Stop();
+            }*/
+
+            if (isJumping && Canvas.GetBottom(CurrentDino) < 170)
+                Canvas.SetBottom(CurrentDino, Canvas.GetBottom(CurrentDino) + gameSpeed * 1.5);
+            else
+                isJumping = false;
+
+            if (!isJumping && Canvas.GetBottom(CurrentDino) >= 30)
+                Canvas.SetBottom(CurrentDino, Canvas.GetBottom(CurrentDino) - gameSpeed * 1.15);
+
+            if (!isJumping && Canvas.GetBottom(CurrentDino) < 30)
+            {
+                Canvas.SetBottom(CurrentDino, 30);
+
+                timerDinoAnimation.Start();
+                timerDinoJump.Stop();
             }
-        }
-
-        private void SetBackground()
-        {
-            Bitmap bmp = Properties.Resources.background;
-
-            BitmapSource bit = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap
-            (
-                bmp.GetHbitmap(),
-                IntPtr.Zero,
-                Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions()
-            );
-
-            ImageBackground.Source = bit;
         }
 
         public void StartGame()

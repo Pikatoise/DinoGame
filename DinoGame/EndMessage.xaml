@@ -6,17 +6,17 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:DinoGame"
         mc:Ignorable="d"
-        Height="120" 
-        Width="250"
-        WindowStartupLocation="Manual"
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         WindowStyle="None"
+        Height="110"
+        Width="320"
         AllowsTransparency="True"
         Background="Transparent">
     <StackPanel>
         <TextBlock
             Text="G A M E  O V E R"
-            FontSize="20"
+            FontSize="28"
             Foreground="#adadad"
             FontFamily="/Fonts/Monocraft.ttf #Monocraft"
             FontWeight="ExtraBold"
@@ -28,8 +28,9 @@
             Click="ButtonToMenu_Click"
             Margin="0 15 0 0"
             Padding="0"
+            Width="50"
             Height="50"
-            Background="Transparent"
+            Background="#1A1B1F"
             BorderBrush="Transparent">
             <Grid
                 VerticalAlignment="Center"

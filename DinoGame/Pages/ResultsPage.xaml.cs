@@ -30,26 +30,27 @@ namespace DinoGame.Pages
 
                 players = players.OrderBy(x => x.Score).Reverse().ToList();
 
+                if (players.Count == 0)
+                    return;
+
                 LBoxPlayers.Items.Clear();
 
                 for (int i = 0; i < players.Count; i++)
                 {
                     ListBoxItem lbitem = new ListBoxItem()
                     {
-                        Width = 350,
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        Margin = new Thickness(0, 5, 0, 0),
-                        Content = $"{players[i].Nickname} | {players[i].Score}"
+                        Margin = new Thickness(5, 5, 5, 0),
+                        Content = $"{i + 1}. {players[i].Nickname} | {players[i].Score}"
                     };
 
-                    lbitem.FontSize = 14;
+                    lbitem.FontSize = 16;
 
                     if (i == 0)
-                        lbitem.FontSize = 22;
+                        lbitem.FontSize = 28;
                     else if (i == 1)
-                        lbitem.FontSize = 18;
+                        lbitem.FontSize = 24;
                     else if (i == 2)
-                        lbitem.FontSize = 16;
+                        lbitem.FontSize = 20;
 
                     LBoxPlayers.Items.Add(lbitem);
                 }

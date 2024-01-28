@@ -25,5 +25,10 @@ namespace DinoGame.Pages
             MainWindow rootFrame = (MainWindow)Application.Current.MainWindow;
             rootFrame.MainFrame.Source = new Uri("Pages/ResultsPage.xaml", UriKind.Relative);
         }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
