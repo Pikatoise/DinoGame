@@ -19,8 +19,8 @@
 
         <Canvas x:Name="CanvasMain" Cursor="">
             <Image
-                x:Name="ImageFloor"
-                Width="1200"
+                x:Name="ImageFloorFirst"
+                Width="600"
                 Stretch="Fill"
                 Height="30"
                 Canvas.Bottom="10" 
@@ -28,22 +28,21 @@
                 Source="/img/floor.png"/>
 
             <Image
-                x:Name="ImageDinoLeft"
-                Width="70"
-                Height="70"
-                Canvas.Bottom="30"
-                Canvas.Left="10" 
-                Visibility="Hidden"
-                Source="/img/dino-left.png"/>
+                x:Name="ImageFloorSecond"
+                Width="600"
+                Stretch="Fill"
+                Height="30"
+                Canvas.Bottom="10"
+                Canvas.Left="600"
+                Source="/img/floor.png" />
 
             <Image
-                x:Name="ImageDinoRight"
+                x:Name="ImageDino"
                 Width="70"
                 Height="70"
                 Canvas.Bottom="30"
                 Canvas.Left="10"
-                Visibility="Hidden"
-                Source="/img/dino-right.png"/>
+                Visibility="Hidden" />
 
             <Image
                 x:Name="ImageCactus"
