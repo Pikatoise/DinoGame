@@ -38,9 +38,7 @@ namespace DinoGame
         private const int FLOORHEIGHT = 30;
         private const double FLOORCHANGEPOSITION = 600;
         private const double CACTUSRELOADPOSITION = 600;
-        private double DINOJUMPSPEEDFACTORMAX = 1.2;
-        private double DINOJUMPSPEEDFACTORMIN = 0.7;
-        private double SCOREFACTOR = 0.7;
+        private const double SCOREFACTOR = 0.7;
 
         private readonly Key[] CONTROLKEYS = new Key[] { Key.W, Key.Space, Key.Up };
 
@@ -52,7 +50,6 @@ namespace DinoGame
         private bool dinoFoot = false;
         private int score = 0;
         private double gameSpeed = 3.0;
-        private double dinoJumpSpeedFactor = 0.5;
 
         // Установка игровых изображений и привязка действий к таймерам
         public MainWindow()
@@ -81,6 +78,43 @@ namespace DinoGame
                 score += (int)(gameSpeed * SCOREFACTOR);
                 TBlockScore.Text = score.ToString();
             };
+        }
+
+        /// <summary>
+        /// Метод для запуска игры
+        /// </summary>
+        public void StartGame()
+        {
+            isGameStarted = true;
+            ImageDino.Visibility = Visibility.Visible;
+
+            timerWorld.Start();
+            timerDinoAnimation.Start();
+            timerSpeedIncrease.Start();
+            timerScore.Start();
+        }
+
+        /// <summary>
+        /// Метод для остановки игры
+        /// </summary>
+        public void StopGame()
+        {
+            isGameStarted = false;
+            timerWorld.Stop();
+            timerDinoJump.Stop();
+            timerScore.Stop();
+            timerSpeedIncrease.Stop();
+            timerDinoAnimation.Stop();
+
+            EndMessage endMessage = new EndMessage(this.Left, this.Top);
+            endMessage.ShowDialog();
+
+            MainFrame.Source = new Uri("Pages/MenuPage.xaml", UriKind.Relative);
+            MainFrame.Visibility = Visibility.Visible;
+
+            SaveGame();
+
+            ClearGame();
         }
 
         // Преобразование карты битов в изображение
@@ -149,7 +183,8 @@ namespace DinoGame
             if (cactusRight >= CACTUSRELOADPOSITION)
             {
                 double cactusNewPosFactor = Math.Round(rnd.NextDouble(), 1);
-                double cactusNewPos = cactusNewPosFactor * (CACTUSMAXSTARTPOSITION - CACTUSMINSTARTPOSITION) + CACTUSMINSTARTPOSITION;
+                double cactusNewPos =
+                    cactusNewPosFactor * (CACTUSMAXSTARTPOSITION - CACTUSMINSTARTPOSITION) + CACTUSMINSTARTPOSITION;
 
                 Canvas.SetRight(ImageCactus, cactusNewPos);
                 return;
@@ -177,9 +212,14 @@ namespace DinoGame
 
             if (isJumping)
             {
+                double dinoJumpSpeedFactorUp = 1.5 - dinoBottom / DINOMAXJUMPHEIGHT;
+
+                if (dinoJumpSpeedFactorUp < 0.3)
+                    dinoJumpSpeedFactorUp = 0.3;
+
                 if (dinoBottom < DINOMAXJUMPHEIGHT)
                 {
-                    Canvas.SetBottom(ImageDino, dinoBottom + gameSpeed);
+                    Canvas.SetBottom(ImageDino, dinoBottom + (gameSpeed * dinoJumpSpeedFactorUp));
                     return;
                 }
                 else
@@ -188,7 +228,12 @@ namespace DinoGame
 
             if (!isJumping && dinoBottom >= FLOORHEIGHT)
             {
-                Canvas.SetBottom(ImageDino, dinoBottom - gameSpeed);
+                double dinoJumpSpeedFactorDown = 1.2 - FLOORHEIGHT / dinoBottom;
+
+                if (dinoJumpSpeedFactorDown < 0.3)
+                    dinoJumpSpeedFactorDown = 0.3;
+
+                Canvas.SetBottom(ImageDino, dinoBottom - (gameSpeed * dinoJumpSpeedFactorDown));
                 return;
             }
 
@@ -196,43 +241,6 @@ namespace DinoGame
 
             timerDinoAnimation.Start();
             timerDinoJump.Stop();
-        }
-
-        /// <summary>
-        /// Метод для запуска игры
-        /// </summary>
-        public void StartGame()
-        {
-            isGameStarted = true;
-            ImageDino.Visibility = Visibility.Visible;
-
-            timerWorld.Start();
-            timerDinoAnimation.Start();
-            timerSpeedIncrease.Start();
-            timerScore.Start();
-        }
-
-        /// <summary>
-        /// Метод для остановки игры
-        /// </summary>
-        public void StopGame()
-        {
-            isGameStarted = false;
-            timerWorld.Stop();
-            timerDinoJump.Stop();
-            timerScore.Stop();
-            timerSpeedIncrease.Stop();
-            timerDinoAnimation.Stop();
-
-            EndMessage endMessage = new EndMessage(this.Left, this.Top);
-            endMessage.ShowDialog();
-
-            MainFrame.Source = new Uri("Pages/MenuPage.xaml", UriKind.Relative);
-            MainFrame.Visibility = Visibility.Visible;
-
-            SaveGame();
-
-            ClearGame();
         }
 
         // Сохранение результата
