@@ -16,7 +16,7 @@ namespace DinoGame
 
         public DispatcherTimer timerWorld = new DispatcherTimer(DispatcherPriority.Render)
         {
-            Interval = TimeSpan.FromMilliseconds(10.0)
+            Interval = TimeSpan.FromMilliseconds(2.0)
         };
         public DispatcherTimer timerDinoAnimation = new DispatcherTimer(DispatcherPriority.Render)
         {
@@ -24,32 +24,35 @@ namespace DinoGame
         };
         public DispatcherTimer timerDinoJump = new DispatcherTimer(DispatcherPriority.Render)
         {
-            Interval = TimeSpan.FromMilliseconds(10.0)
+            Interval = TimeSpan.FromMilliseconds(2.0)
         };
         public DispatcherTimer timerSpeedIncrease = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000.0) };
         public DispatcherTimer timerScore = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(125.0) };
 
-        private const double GAMESPEEDINCREASE = 0.2;
         private const int XDINO = 10;
         private const int YDINO = 30;
-        private const int CACTUSMINSTARTPOSITION = -150;
-        private const int CACTUSMAXSTARTPOSITION = -400;
-        private const int DINOMAXJUMPHEIGHT = 170;
+        private const int CACTUSMINSTARTPOSITION = -250;
+        private const int CACTUSMAXSTARTPOSITION = -600;
         private const int FLOORHEIGHT = 30;
+        private const double GAMESPEEDINCREASE = 0.4;
         private const double FLOORCHANGEPOSITION = 600;
         private const double CACTUSRELOADPOSITION = 600;
         private const double SCOREFACTOR = 0.7;
+        private const double BASEJUMPFACTOR = 3;
+        private const double JUMPFACTORSTEP = 0.1;
+        private const double JUMPSPEED = 3.5;
 
         private readonly Key[] CONTROLKEYS = new Key[] { Key.W, Key.Space, Key.Up };
 
-        private BitmapSource dinoLeftFoot = BitmapToImage(Properties.Resources.dino_left);
-        private BitmapSource dinoRightFoot = BitmapToImage(Properties.Resources.dino_right);
+        private BitmapSource dinoLeftFoot = BitmapToImage(Properties.Resources.dino_left); // Изображеине динозаврика на левой ноге
+        private BitmapSource dinoRightFoot = BitmapToImage(Properties.Resources.dino_right); // Изображеине динозаврика на правой ноге
         private Random rnd = new Random();
         private bool isGameStarted = false;
-        private bool isJumping = false;
-        private bool dinoFoot = false;
+        private bool isJumping = false; // Летит ли динозаврик
+        private bool dinoFoot = false; // Левая или правая нога динозаврика
         private int score = 0;
         private double gameSpeed = 3.0;
+        private double dinoJumpFactor = BASEJUMPFACTOR; // Зависимость от времени полета
 
         // Установка игровых изображений и привязка действий к таймерам
         public MainWindow()
@@ -156,8 +159,16 @@ namespace DinoGame
             double floorSecondLeft = Canvas.GetLeft(ImageFloorSecond);
             double currentGameSpeed = gameSpeed;
 
-            Canvas.SetLeft(ImageFloorFirst, floorFirstLeft - currentGameSpeed);
-            Canvas.SetLeft(ImageFloorSecond, floorSecondLeft - currentGameSpeed);
+            double divider = 5.0;
+
+            for (int i = 0; i < (int)divider; i++)
+            {
+                floorFirstLeft -= currentGameSpeed / divider;
+                floorSecondLeft -= currentGameSpeed / divider;
+
+                Canvas.SetLeft(ImageFloorFirst, floorFirstLeft);
+                Canvas.SetLeft(ImageFloorSecond, floorSecondLeft);
+            }
 
             if (floorFirstLeft <= FLOORCHANGEPOSITION * -1)
             {
@@ -190,19 +201,39 @@ namespace DinoGame
                 return;
             }
 
-            Canvas.SetRight(ImageCactus, cactusRight + currentGameSpeed);
+            double divider = 5.0;
 
-            /*if (CollisionCheck())
-                StopGame();*/
+            for (int i = 0; i < (int)divider; i++)
+            {
+                cactusRight += currentGameSpeed / divider;
+                Canvas.SetRight(ImageCactus, cactusRight);
+            }
+
+            if (CollisionCheck())
+                StopGame();
         }
 
         // Проверка столкновения динозаврика с кактусом
         private bool CollisionCheck()
         {
-            double xCactus = Width - Canvas.GetRight(ImageCactus);
+            double xCactus = Width - Canvas.GetRight(ImageCactus) - ImageCactus.Width;
             double yCactus = Canvas.GetBottom(ImageCactus);
+            double xDino = Canvas.GetLeft(ImageDino);
+            double yDino = Canvas.GetBottom(ImageDino);
 
-            return XDINO < xCactus && XDINO + ImageDino.Width >= xCactus && YDINO + 5 <= yCactus + ImageCactus.Height;
+            Rect Cactus = new Rect()
+            {
+                Location = new Point(xCactus, yCactus),
+                Size = new Size(ImageCactus.Width, ImageCactus.Height)
+            };
+
+            Rect Dino = new Rect()
+            {
+                Location = new Point(xDino + 10, yDino + 10),
+                Size = new Size(ImageDino.Width - 10, ImageDino.Height)
+            };
+
+            return Cactus.IntersectsWith(Dino);
         }
 
         // Анимация прыжка
@@ -212,32 +243,33 @@ namespace DinoGame
 
             if (isJumping)
             {
-                double dinoJumpSpeedFactorUp = 1.5 - dinoBottom / DINOMAXJUMPHEIGHT;
-
-                if (dinoJumpSpeedFactorUp < 0.3)
-                    dinoJumpSpeedFactorUp = 0.3;
-
-                if (dinoBottom < DINOMAXJUMPHEIGHT)
+                if (dinoJumpFactor < 0.1)
                 {
-                    Canvas.SetBottom(ImageDino, dinoBottom + (gameSpeed * dinoJumpSpeedFactorUp));
-                    return;
+                    isJumping = false;
+                    dinoJumpFactor = 0.1;
                 }
                 else
-                    isJumping = false;
+                {
+                    Canvas.SetBottom(ImageDino, dinoBottom + JUMPSPEED * dinoJumpFactor);
+
+                    dinoJumpFactor -= JUMPFACTORSTEP;
+
+                    return;
+                }
             }
 
-            if (!isJumping && dinoBottom >= FLOORHEIGHT)
+            if (!isJumping && dinoBottom > FLOORHEIGHT && dinoJumpFactor >= 0.1)
             {
-                double dinoJumpSpeedFactorDown = 1.2 - FLOORHEIGHT / dinoBottom;
+                Canvas.SetBottom(ImageDino, dinoBottom - JUMPSPEED * dinoJumpFactor);
 
-                if (dinoJumpSpeedFactorDown < 0.3)
-                    dinoJumpSpeedFactorDown = 0.3;
+                dinoJumpFactor += JUMPFACTORSTEP;
 
-                Canvas.SetBottom(ImageDino, dinoBottom - (gameSpeed * dinoJumpSpeedFactorDown));
                 return;
             }
 
             Canvas.SetBottom(ImageDino, FLOORHEIGHT);
+
+            dinoJumpFactor = BASEJUMPFACTOR;
 
             timerDinoAnimation.Start();
             timerDinoJump.Stop();
@@ -263,6 +295,7 @@ namespace DinoGame
         private void ClearGame()
         {
             Canvas.SetLeft(ImageFloorFirst, 0);
+            Canvas.SetLeft(ImageFloorSecond, 600);
 
             Canvas.SetBottom(ImageDino, 30);
             Canvas.SetLeft(ImageDino, 10);
