@@ -83,6 +83,16 @@ namespace DinoGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap dino_dead {
+            get {
+                object obj = ResourceManager.GetObject("dino-dead", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap dino_left {
             get {
                 object obj = ResourceManager.GetObject("dino-left", resourceCulture);

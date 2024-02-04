@@ -46,6 +46,7 @@ namespace DinoGame
 
         private BitmapSource dinoLeftFoot = BitmapToImage(Properties.Resources.dino_left); // Изображеине динозаврика на левой ноге
         private BitmapSource dinoRightFoot = BitmapToImage(Properties.Resources.dino_right); // Изображеине динозаврика на правой ноге
+        private BitmapSource dinoDead = BitmapToImage(Properties.Resources.dino_dead);
         private Random rnd = new Random();
         private bool isGameStarted = false;
         private bool isJumping = false; // Летит ли динозаврик
@@ -109,7 +110,9 @@ namespace DinoGame
             timerSpeedIncrease.Stop();
             timerDinoAnimation.Stop();
 
-            EndMessage endMessage = new EndMessage(this.Left, this.Top);
+            ImageDino.Source = dinoDead;
+
+            EndMessage endMessage = new EndMessage();
             endMessage.ShowDialog();
 
             MainFrame.Source = new Uri("Pages/MenuPage.xaml", UriKind.Relative);
