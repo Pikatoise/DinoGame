@@ -303,6 +303,7 @@ namespace DinoGame
             Canvas.SetBottom(ImageDino, 30);
             Canvas.SetLeft(ImageDino, 10);
             ImageDino.Visibility = Visibility.Hidden;
+            ImageDino.Source = dinoFoot ? dinoLeftFoot : dinoRightFoot;
 
             Canvas.SetRight(ImageCactus, -150);
 
