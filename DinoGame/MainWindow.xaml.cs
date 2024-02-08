@@ -28,6 +28,7 @@ namespace DinoGame
         };
         public DispatcherTimer timerSpeedIncrease = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000.0) };
         public DispatcherTimer timerScore = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(125.0) };
+        public DispatcherTimer timerTip = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(100.0) };
 
         private const int XDINO = 10;
         private const int YDINO = 30;
@@ -69,6 +70,8 @@ namespace DinoGame
             Canvas.SetLeft(ImageDino, XDINO);
             Canvas.SetBottom(ImageDino, YDINO);
 
+            TBlockTip.Text = "Jump\nSPACE | W | ↑";
+
             timerWorld.Tick += FloorMoving;
             timerWorld.Tick += CactusMoving;
             timerDinoJump.Tick += DinoJump;
@@ -82,6 +85,7 @@ namespace DinoGame
                 score += (int)(gameSpeed * SCOREFACTOR);
                 TBlockScore.Text = score.ToString();
             };
+            timerTip.Tick += TipOpacity;
         }
 
         /// <summary>
@@ -91,11 +95,13 @@ namespace DinoGame
         {
             isGameStarted = true;
             ImageDino.Visibility = Visibility.Visible;
+            TBlockTip.Opacity = 1;
 
             timerWorld.Start();
             timerDinoAnimation.Start();
             timerSpeedIncrease.Start();
             timerScore.Start();
+            timerTip.Start();
         }
 
         /// <summary>
@@ -104,6 +110,8 @@ namespace DinoGame
         public void StopGame()
         {
             isGameStarted = false;
+            TBlockTip.Opacity = 0;
+            timerTip.Stop();
             timerWorld.Stop();
             timerDinoJump.Stop();
             timerScore.Stop();
@@ -311,6 +319,15 @@ namespace DinoGame
             score = 0;
             gameSpeed = 3.0;
             TBlockScore.Text = "";
+        }
+
+        // Скрытие подсказки
+        private void TipOpacity(object? sender, EventArgs e)
+        {
+            if (TBlockTip.Opacity > 0)
+                TBlockTip.Opacity -= 0.02;
+            else
+                timerTip.Stop();
         }
     }
 }

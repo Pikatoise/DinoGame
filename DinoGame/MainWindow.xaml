@@ -11,7 +11,8 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         WindowStyle="None"
-        PreviewKeyDown="Window_PreviewKeyDown">
+        PreviewKeyDown="Window_PreviewKeyDown"
+        Background="Black">
     <Grid>
         <Image 
             x:Name="ImageBackground"
@@ -59,7 +60,9 @@
                 Canvas.Right="20"
                 Canvas.Top="20">
                 <TextBlock.Foreground>
-                    <SolidColorBrush Color="White" Opacity="0.77"/>
+                    <SolidColorBrush
+                        Color="White"
+                        Opacity="0.77" />
                 </TextBlock.Foreground>
             </TextBlock>
 
@@ -70,5 +73,22 @@
                 Height="650"
                 NavigationUIVisibility="Hidden"/>
         </Canvas>
+
+        <TextBlock
+            x:Name="TBlockTip"
+            Text="123"
+            FontSize="26"
+            Opacity="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0 0 0 200"
+            TextAlignment="Center"
+            FontFamily="/Fonts/Monocraft.ttf #Monocraft">
+            <TextBlock.Foreground>
+                <SolidColorBrush
+                    Color="White"
+                    Opacity="0.77" />
+            </TextBlock.Foreground>
+        </TextBlock>
     </Grid>
 </Window>
