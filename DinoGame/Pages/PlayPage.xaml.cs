@@ -9,6 +9,8 @@ namespace DinoGame.Pages
         public PlayPage()
         {
             InitializeComponent();
+
+            TBoxNickname.Focus();
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)

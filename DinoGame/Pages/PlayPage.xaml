@@ -35,7 +35,7 @@
         <StackPanel
             VerticalAlignment="Center">
             <TextBlock
-                Text="Ник:"
+                Text="Псевдоним:"
                 FontSize="24"
                 HorizontalAlignment="Center"
                 FontFamily="/Fonts/Monocraft.ttf #Monocraft">
@@ -54,6 +54,7 @@
                 FontFamily="/Fonts/Monocraft.ttf #Monocraft"
                 FontSize="18"
                 Padding="5"
+                Text="Игрок"
                 Margin="0 5 0 0"
                 materialDesign:TextFieldAssist.UnderlineBrush="Transparent"
                 CaretBrush="White"

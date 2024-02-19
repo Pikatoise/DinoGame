@@ -32,7 +32,7 @@ namespace DinoGame
 
         private const int XDINO = 10;
         private const int YDINO = 30;
-        private const int CACTUSMINSTARTPOSITION = -250;
+        private const int CACTUSMINSTARTPOSITION = -350;
         private const int CACTUSMAXSTARTPOSITION = -600;
         private const int FLOORHEIGHT = 30;
         private const double GAMESPEEDINCREASE = 0.4;
